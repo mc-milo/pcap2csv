@@ -26,10 +26,14 @@ jobs:
 
     - name: Set up image name
       id: image
-      run: echo "IMAGE=ghcr.io/${{ github.repository_owner }}/pcap2csv:$(date +%s)" >> $GITHUB_ENV
+      run: echo "IMAGE=ghcr.io/${{ github.repository_owner }}/pcap2csv" >> $GITHUB_ENV
 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag $IMAGE
+      run: |
+        docker build . --file Dockerfile --tag ${IMAGE}:$(date +%s)
+        docker build . --file Dockerfile --tag ${IMAGE}:latest
 
     - name: Push image to GHCR
-      run: docker push $IMAGE
+      run: |
+        docker push $IMAGE:$(date +%s)
+        docker push $IMAGE:latest
