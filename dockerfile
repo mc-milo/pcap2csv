@@ -1,5 +1,10 @@
 FROM python:3.11.12-bullseye
 
+LABEL org.opencontainers.image.source=https://github.com/mc-milo/pcap2csv
+LABEL org.opencontainers.image.description="pcap2csv"
+LABEL org.opencontainers.image.licenses=MIT
+LABEL maintainer="mc-milo <billmillios1@gmail.com>"
+
 WORKDIR /app
 
 ENV PCAPS_DIR="/app/pcaps"
