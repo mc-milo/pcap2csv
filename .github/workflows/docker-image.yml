@@ -12,7 +12,7 @@ jobs:
 
     permissions:
       contents: read
-      packages: write  # Required for GHCR
+      packages: write
 
     steps:
     - uses: actions/checkout@v4
@@ -24,16 +24,17 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Set up image name
-      id: image
-      run: echo "IMAGE=ghcr.io/${{ github.repository_owner }}/pcap2csv" >> $GITHUB_ENV
+    - name: Set up image name and tag
+      run: |
+        echo "IMAGE=ghcr.io/${{ github.repository_owner }}/pcap2csv" >> $GITHUB_ENV
+        echo "IMAGE_TAG=$(date +%s)" >> $GITHUB_ENV
 
     - name: Build the Docker image
       run: |
-        docker build . --file Dockerfile --tag ${IMAGE}:$(date +%s)
-        docker build . --file Dockerfile --tag ${IMAGE}:latest
+        docker build . --file Dockerfile --tag ${IMAGE}:${IMAGE_TAG}
+        docker tag ${IMAGE}:${IMAGE_TAG} ${IMAGE}:latest
 
     - name: Push image to GHCR
       run: |
-        docker push $IMAGE:$(date +%s)
-        docker push $IMAGE:latest
+        docker push ${IMAGE}:${IMAGE_TAG}
+        docker push ${IMAGE}:latest
