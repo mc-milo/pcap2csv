@@ -18,7 +18,7 @@ if __name__ == '__main__':
         for f in os.listdir(directory)
         if f.endswith('.pcap') and os.path.isfile(os.path.join(directory, f))
     ]
-    subfiles_size = "10M" # MB
+    subfiles_size = 10 # MB
     split_directory = '/app/split_temp/'
     destination_directory = '/app/output/'
     converted_csv_files_directory = '/app/csv_files/'
@@ -34,7 +34,7 @@ if __name__ == '__main__':
         pcap_file = pcapfiles[i]
         print(pcap_file)
         print(">>>> 1. splitting the .pcap file.")
-        os.system('tcpdump -r '+ pcap_file +' -w ' + split_directory + 'split_temp -C ' + subfiles_size)
+        os.system('tcpdump -r '+ pcap_file +' -w ' + split_directory + 'split_temp -C ' + str(subfiles_size))
         subfiles = os.listdir(split_directory)
         print(">>>> 2. Converting (sub) .pcap files to .csv files.")
         processes = []
