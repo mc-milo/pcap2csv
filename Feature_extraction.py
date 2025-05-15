@@ -472,7 +472,7 @@ class Feature_extraction():
          #   n_rows = 10
         #else: 
          #   n_rows = 15
-        n_rows = 10
+        n_rows = 100
         df_summary_list = []
         while last_row<len(processed_df):
             #Get the first n_processed rows
