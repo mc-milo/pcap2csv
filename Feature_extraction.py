@@ -453,7 +453,7 @@ class Feature_extraction():
                            "Max": 0,                               
                            "AVG": 0,                               
                            "Std": 0,                               
-                           "Tot size": ethernet_frame_size,         
+                           "Tot_size": ethernet_frame_size,         
                            "IAT": IAT, 
                            "Number": 1,                            #Number of packets
 
