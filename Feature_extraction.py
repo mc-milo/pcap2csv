@@ -453,7 +453,7 @@ class Feature_extraction():
                            "Max": 0,                               
                            "AVG": 0,                               
                            "Std": 0,                               
-                           "Tot_size": ethernet_frame_size,         
+                           "Tot size": ethernet_frame_size,         
                            "IAT": IAT, 
                            "Number": 1,                            #Number of packets
 
@@ -517,5 +517,6 @@ class Feature_extraction():
             last_row += n_rows
         processed_df = pd.concat(df_summary_list).reset_index(drop=True)
         processed_df = processed_df.drop(columns = 'ts')
+        processed_df = processed_df.rename(columns={"Tot size": "Tot_size", "Protocol Type": "Protocol_Type", "Tot sum": "Tot_sum"} )
         processed_df.to_csv(csv_file_name+".csv", index=False)
         return True
